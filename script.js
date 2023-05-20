@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
-const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
+const BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
 
 // Don't touch this function please
@@ -41,16 +41,56 @@ const fetchMovie = async (movieId) => {
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
   movies.map((movie) => {
-    const movieDiv = document.createElement("div");
-    movieDiv.innerHTML = `
+    const myCarouselElement = document.querySelector("#myCarousel");
+
+    const carousel = new bootstrap.Carousel(myCarouselElement, {
+      interval: 2000,
+      touch: false,
+    });
+
+    myCarouselElement.innerHTML = `
+    <h3>Popular Movies</h3>
+    <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
         <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
       movie.title
-    } poster">
-        <h3>${movie.title}</h3>`;
-    movieDiv.addEventListener("click", () => {
-      movieDetails(movie);
-    });
-    CONTAINER.appendChild(movieDiv);
+    } poster" class="d-block w-100">
+        <h3>${movie.title}</h3>
+      </div>
+      <div class="carousel-item">
+        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
+      movie.title
+    } poster" class="d-block w-100" >
+        <h3>${movie.title}</h3>
+      </div>
+      <div class="carousel-item">
+        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
+      movie.title
+    } poster" class="d-block w-100">
+        <h3>${movie.title}</h3>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>`;
+
+    // const movieDiv = document.createElement("div");
+    // movieDiv.innerHTML = `
+    //     <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
+    //   movie.title
+    // } poster">
+    //     <h3>${movie.title}</h3>`;
+    // movieDiv.addEventListener("click", () => {
+    //   movieDetails(movie);
+    // });
+    // CONTAINER.appendChild(movieDiv);
   });
 };
 
