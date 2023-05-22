@@ -60,7 +60,7 @@ const renderMovies = (movies) => {
         BACKDROP_BASE_URL + movie.backdrop_path
       }" class="card-img-top" />
       <div class="card-body">
-        <h5 class="card-title">${movie.title}</h5>
+        <h5 class="card-title text-center">${movie.title}</h5>
         <p class="card-text">${movie.overview.slice(0, 100)}</p>
         <p class="card-text ">vote Average: ${movie.vote_average}</p>
         <p class="card-text">vote Count: ${movie.vote_count}</p>    
