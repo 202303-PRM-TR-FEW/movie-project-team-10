@@ -40,58 +40,40 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  movies.map((movie) => {
-    const myCarouselElement = document.querySelector("#myCarousel");
+  console.log(movies);
+  const myCarouselElement = document.querySelector("#carousel");
 
-    const carousel = new bootstrap.Carousel(myCarouselElement, {
-      interval: 2000,
-      touch: false,
+  const content = movies.map((movie) => {
+    const movieDiv = document.createElement("div");
+    const movieBtn = `
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#movieModal"
+      >
+        Details
+      </button>`;
+    movieDiv.innerHTML = ` 
+    <div class="card" style="width: 18rem; margin-bottom: 10PX;">
+      <img src="${
+        BACKDROP_BASE_URL + movie.backdrop_path
+      }" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title">${movie.title}</h5>
+        <p class="card-text">${movie.overview.slice(0, 100)}</p>
+        <p class="card-text ">vote Average: ${movie.vote_average}</p>
+        <p class="card-text">vote Count: ${movie.vote_count}</p>    
+      </div>
+    </div>`;
+
+    movieDiv.addEventListener("click", () => {
+      movieDetails(movie);
     });
-
-    myCarouselElement.innerHTML = `
-    <h3>Popular Movies</h3>
-    <div id="carouselExample" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster" class="d-block w-100">
-        <h3>${movie.title}</h3>
-      </div>
-      <div class="carousel-item">
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster" class="d-block w-100" >
-        <h3>${movie.title}</h3>
-      </div>
-      <div class="carousel-item">
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster" class="d-block w-100">
-        <h3>${movie.title}</h3>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>`;
-
-    // const movieDiv = document.createElement("div");
-    // movieDiv.innerHTML = `
-    //     <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-    //   movie.title
-    // } poster">
-    //     <h3>${movie.title}</h3>`;
-    // movieDiv.addEventListener("click", () => {
-    //   movieDetails(movie);
-    // });
-    // CONTAINER.appendChild(movieDiv);
+    CONTAINER.appendChild(movieDiv);
   });
+
+  myCarouselElement.innerHTML = "<div class='carousel'>" + content + "</div>";
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
