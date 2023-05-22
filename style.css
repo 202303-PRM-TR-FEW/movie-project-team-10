@@ -1,11 +1,22 @@
 #movie-backdrop {
-    width: 100%;
+  width: 100%;
 }
 
 .container {
-    padding-top: 32px;
+  padding-top: 32px;
 }
 
 #actors {
-    margin: 24px 16px 0 0;
+  margin: 24px 16px 0 0;
+}
+
+.actorsList {
+  display: flex;
+  margin-top: 1rem;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  cursor: pointer;
 }
