@@ -1,11 +1,24 @@
 #movie-backdrop {
-    width: 100%;
+  width: 100%;
 }
 
 .container {
-    padding-top: 32px;
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: stretch;
+  flex-wrap: wrap;
+  
+}
+.card{
+    cursor: pointer;
+}
+#actors {
+  margin: 24px 16px 0 0;
 }
 
-#actors {
-    margin: 24px 16px 0 0;
+.carousel {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
