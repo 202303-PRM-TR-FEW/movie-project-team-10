@@ -107,17 +107,52 @@ const fetchActors = async () => {
 };
 
 //function for fetching one actor
+//returns actorRes
+
 const fetchActor = async (person_id) => {
   const url = constructUrl(`person/${person_id}`);
   const res = await fetch(url);
   const data = await res.json();
+  // console.log(data);
   return data;
+};
+
+//fetch function for movies of a actor
+//returns movieRes
+const fetchActorMovies = async (person_id) => {
+  const url = constructUrl(`person/${person_id}/movie_credits`);
+  const res = await fetch(url);
+  const data = await res.json();
+  const movieRes = data.cast;
+  const knownFor = document.querySelector("#knownFor");
+  const movieCardList = document.createElement("ul");
+  movieCardList.setAttribute(
+    "class",
+    "list-unstyled list-group list-group-horizontal"
+  );
+  for (let i = 0; i <= 4; i++) {
+    const movieCard = document.createElement("li");
+    movieCard.innerHTML = `    
+    <li class="list-group-item m-2">
+    <img id="movie-img" src="${
+      movieRes[i].backdrop_path == null
+        ? "images/movieLogo2.jpg"
+        : PROFILE_BASE_URL + movieRes[i].backdrop_path
+    }" style="width: 20rem; height: 10rem"><h5 class="card-title">${
+      movieRes[i].title
+    }</h5>     
+      </li>`;
+    movieCardList.appendChild(movieCard);
+    knownFor.appendChild(movieCardList);
+  }
 };
 
 //function for actor infos
 const actorInfo = async (actor) => {
   // console.log(actor);
   const actorRes = await fetchActor(actor.id);
+  // const movieRes = await fetchActorMovies(actor.id);
+  // console.log(movieRes);
   renderActor(actorRes);
 };
 
@@ -183,7 +218,10 @@ const renderActor = (actor) => {
       }</p></div><div>
       </div>
       <h3> Related Movies:</h3>
-      <div class="row justify-content-center" id="knownFor"></div></div>`;
+      <div class="row justify-content-center" id="knownFor">     
+      </div>    
+      </div>`;
+  fetchActorMovies(actor.id);
 };
 
 //function for fetching movie cast
@@ -200,9 +238,9 @@ const fetchCast = async (movie_id) => {
 
 const renderCast = (movieCast) => {
   const cast = document.querySelector("#actors");
-  movieCast.slice().map((actor) => {
+  movieCast.slice(0,4).map((actor) => {
     const actorCard = document.createElement("li");
-    actorCard.innerHTML = `
+    actorCard.innerHTML = `  
     <li class="list-group-item m-2"><img id="actor-img" src="${
       actor.profile_path == null
         ? "images/avatar.svg"
@@ -216,7 +254,7 @@ const renderCast = (movieCast) => {
     });
   });
 
-  console.log(movieCast);
+  // console.log(movieCast);
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
