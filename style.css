@@ -22,3 +22,35 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
+.about-container {
+  background-color: rgb(255, 255, 255);
+  height: 500px;
+  width: 100%;
+}
+
+  .about-text {
+    font-size: 20px;
+    color: rgb(185, 42, 42);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+
+  .about-text2 {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: end;
+    margin-right: 150px;
+}
+
+.aboutImage {
+  height: 307px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
