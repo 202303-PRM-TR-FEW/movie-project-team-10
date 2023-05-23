@@ -23,8 +23,9 @@ const constructUrl = (path) => {
 // You may need to add to this function, definitely don't delete it.
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
-  renderMovie(movieRes);
-  // console.log(movieRes)
+  const movieCast = await fetchCast(movie.id);
+  renderMovie(movieRes, movieCast);
+  // console.log(movieCast)
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
@@ -60,7 +61,7 @@ const renderMovies = (movies) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie) => {
+const renderMovie = (movie, movieCast) => {
   CONTAINER.innerHTML = `
     <div class="row">
         <div class="col-md-4">
@@ -79,8 +80,9 @@ const renderMovie = (movie) => {
         </div>
         </div>
             <h3>Actors:</h3>
-            <ul id="actors" class="list-unstyled"></ul>
+            <ul id="actors" class="list-unstyled list-group list-group-horizontal"></ul>
     </div>`;
+  renderCast(movieCast);
 };
 
 //Actors Page
@@ -183,4 +185,38 @@ const renderActor = (actor) => {
       <h3> Related Movies:</h3>
       <div class="row justify-content-center" id="knownFor"></div></div>`;
 };
+
+//function for fetching movie cast
+
+const fetchCast = async (movie_id) => {
+  const url = constructUrl(`movie/${movie_id}/credits`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.cast);
+  return data.cast;
+};
+
+// function for displaying cast of a movie
+
+const renderCast = (movieCast) => {
+  const cast = document.querySelector("#actors");
+  movieCast.slice().map((actor) => {
+    const actorCard = document.createElement("li");
+    actorCard.innerHTML = `
+    <li class="list-group-item m-2"><img id="actor-img" src="${
+      actor.profile_path == null
+        ? "images/avatar.svg"
+        : PROFILE_BASE_URL + actor.profile_path
+    }" style="width: 9rem;"><h5 class="card-title">${actor.name}</h5>     
+      </li>
+    `;
+    cast.appendChild(actorCard);
+    actorCard.addEventListener("click", () => {
+      actorInfo(actor);
+    });
+  });
+
+  console.log(movieCast);
+};
+
 document.addEventListener("DOMContentLoaded", autorun);
