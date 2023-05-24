@@ -46,18 +46,40 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  movies.map((movie) => {
+  console.log(movies);
+  const myCarouselElement = document.querySelector("#carousel");
+
+  const content = movies.map((movie) => {
     const movieDiv = document.createElement("div");
-    movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
-      movie.title
-    } poster">
-        <h3>${movie.title}</h3>`;
+    const movieBtn = `
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#movieModal"
+      >
+        Details
+      </button>`;
+    movieDiv.innerHTML = ` 
+    <div class="card" style="width: 18rem; margin-bottom: 10PX;">
+      <img src="${
+        BACKDROP_BASE_URL + movie.backdrop_path
+      }" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title text-center">${movie.title}</h5>
+        <p class="card-text">${movie.overview.slice(0, 100)}</p>
+        <p class="card-text ">vote Average: ${movie.vote_average}</p>
+        <p class="card-text">vote Count: ${movie.vote_count}</p>    
+      </div>
+    </div>`;
+
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
     CONTAINER.appendChild(movieDiv);
   });
+
+  myCarouselElement.innerHTML = "<div class='carousel'>" + content + "</div>";
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
