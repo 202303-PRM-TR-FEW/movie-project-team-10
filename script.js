@@ -24,8 +24,9 @@ const constructUrl = (path) => {
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
   const movieCast = await fetchCast(movie.id);
-  renderMovie(movieRes, movieCast);
-  // console.log(movieCast)
+  const relatedMovies = await fetchRelatedMovies(movie.id);
+  renderMovie(movieRes, movieCast, relatedMovies);
+  console.log(relatedMovies);
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
@@ -44,9 +45,18 @@ const fetchMovie = async (movieId) => {
   return res.json();
 };
 
+//function for fetching related movies
+const fetchRelatedMovies = async (movie_id) => {
+  const url = constructUrl(`movie/${movie_id}/similar`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results)
+  return data.results;
+};
+
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  console.log(movies);
+  // console.log(movies);
   const myCarouselElement = document.querySelector("#carousel");
 
   const content = movies.map((movie) => {
@@ -83,7 +93,7 @@ const renderMovies = (movies) => {
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie, movieCast) => {
+const renderMovie = (movie, movieCast, relatedMovies) => {
   CONTAINER.innerHTML = `
     <div class="row">
         <div class="col-md-4">
@@ -99,14 +109,46 @@ const renderMovie = (movie, movieCast) => {
               movie.release_date
             }</p>
             <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+            <p id="movie-language"><b>Language:</b> ${movie.spoken_languages.map(
+              (languge) => `${languge.english_name}`
+            )}</p>
+
             <h3>Overview:</h3>
             <p id="movie-overview">${movie.overview}</p>
         </div>
         </div>
             <h3>Actors:</h3>
             <ul id="actors" class="list-unstyled list-group list-group-horizontal"></ul>
+        
+            <h3>Related Movies:</h3>
+            <ul id="relatedMoviesList" class="list-unstyled list-group list-group-horizontal"></ul>
+
     </div>`;
   renderCast(movieCast);
+  renderRelatedMovies(relatedMovies);
+};
+
+//function for related movies
+const renderRelatedMovies = (relatedMovies) => {
+  console.log(relatedMovies);
+  const relatedMoviesList = document.querySelector("#relatedMoviesList");
+  relatedMovies.slice(0, 5).map((movie) => {
+    const movieCard = document.createElement("li");
+    movieCard.innerHTML = `    
+    <li class="list-group-item m-2">
+    <img id="movie-img" src="${
+      movie.backdrop_path == null
+        ? "images/movieLogo2.jpg"
+        : BACKDROP_BASE_URL + movie.backdrop_path
+    }" style="width: 20rem; height: 10rem"><h5 class="card-title">${
+      movie.title
+    }</h5>     
+      </li>`;
+    relatedMoviesList.appendChild(movieCard);
+    movieCard.addEventListener("click", () => {
+      movieDetails(movie);
+    });
+  });
 };
 
 //Actors Page
@@ -265,7 +307,7 @@ const fetchCast = async (movie_id) => {
 
 const renderCast = (movieCast) => {
   const cast = document.querySelector("#actors");
-  movieCast.slice(0, 4).map((actor) => {
+  movieCast.slice(0, 5).map((actor) => {
     const actorCard = document.createElement("li");
     actorCard.innerHTML = `  
     <li class="list-group-item m-2"><img id="actor-img" src="${
