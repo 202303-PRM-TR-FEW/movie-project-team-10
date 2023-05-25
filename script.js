@@ -88,7 +88,9 @@ const renderMovie = (movie, movieCast) => {
     <div class="row">
         <div class="col-md-4">
              <img id="movie-backdrop" src=${
-               BACKDROP_BASE_URL + movie.backdrop_path
+               movie.backdrop_path == null
+                 ? "images/movieLogo2.jpg"
+                 : BACKDROP_BASE_URL + movie.backdrop_path
              }>
         </div>
         <div class="col-md-8">
@@ -166,6 +168,9 @@ const fetchActorMovies = async (person_id) => {
       </li>`;
     movieCardList.appendChild(movieCard);
     knownFor.appendChild(movieCardList);
+    movieCard.addEventListener("click", () => {
+      movieDetails(movieRes[i]);
+    });
   }
 };
 
@@ -260,7 +265,7 @@ const fetchCast = async (movie_id) => {
 
 const renderCast = (movieCast) => {
   const cast = document.querySelector("#actors");
-  movieCast.slice(0,4).map((actor) => {
+  movieCast.slice(0, 4).map((actor) => {
     const actorCard = document.createElement("li");
     actorCard.innerHTML = `  
     <li class="list-group-item m-2"><img id="actor-img" src="${
