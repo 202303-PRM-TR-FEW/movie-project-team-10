@@ -45,25 +45,7 @@
           class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
         >
           <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle text-white"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Movies
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
-            </ul>
-          </li>
+          
           <li><a href="#" class="nav-link px-2 text-white" id="aboutBtn">About</a></li>
           <li>
             <a id="actorsButton" href="#" class="nav-link px-2 text-white"
@@ -78,15 +60,23 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
+              Movies
+            </a>
+            <ul class="dropdown-menu" id="dropdown-movie">
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle text-white"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               Filter
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
+            <ul class="dropdown-menu" >
+              
             </ul>
           </li>
         </ul>
