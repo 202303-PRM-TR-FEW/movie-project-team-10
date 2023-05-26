@@ -233,7 +233,9 @@ const renderActors = (actors) => {
 
   actors.map((actor) => {
     const actorCard = document.createElement("div");
-    actorCard.innerHTML = `<div class="card mb-3" style="width: 12rem;">
+    actorCard.innerHTML = `
+    
+    <div class="card mb-3" style="width: 12rem;">
     <img id="actor-img" src="${
       actor.profile_path == null
         ? "images/avatar.svg"

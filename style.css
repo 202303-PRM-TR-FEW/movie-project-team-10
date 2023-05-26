@@ -4,6 +4,10 @@
 
 .container {
   padding-top: 32px;
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: stretch;
+  flex-wrap: wrap;
 }
 
 #actors {
@@ -23,6 +27,13 @@
 }
 
 .card {
+  cursor: pointer;
+}
+
+#movie-img {
+  cursor: pointer;
+}
+#actor-img {
   cursor: pointer;
 }
 
