@@ -327,3 +327,21 @@ const renderCast = (movieCast) => {
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
+
+
+// About Page /w inner HTML
+
+const aboutPage = () => {
+  CONTAINER.innerHTML=`
+  <div class="about-container">
+    <p class="about-text">" When We wrote this code, only god and we knew how it worked. Now, only god knows it! "</p>
+    <p class="about-text2"> - Anonymous</p>
+    <p class= "imageContainer"><img class="aboutImage" src="images/dogecoin-2-1-1138x640.jpg"></p>
+  </div>`
+}
+
+const aboutBtn = document.querySelector("#aboutBtn");
+aboutBtn.addEventListener("click", () => {
+  CONTAINER.innerHTML = "";
+  aboutPage();
+});
