@@ -347,3 +347,57 @@ aboutBtn.addEventListener("click", () => {
   CONTAINER.innerHTML = "";
   aboutPage();
 });
+
+
+
+
+
+/// filter and genre dropdown section 
+
+
+
+// fetching genre and adding element to the movie dropdown 
+const dropDownContent = document.getElementById("dropdown-movie")
+const url = constructUrl("genre/movie/list");
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    data.genres.forEach(genre => {
+      const options = document.createElement('li')
+      dropDownContent.appendChild(options)
+
+      const option = document.createElement('a')
+      options.appendChild(option)
+      option.classList.add('dropdown-item')
+      option.value = genre.id
+      option.href = '#'
+      option.textContent = genre.name;
+      console.log(data)
+    
+    option.addEventListener('click', function() {
+      const selectedGenreId = genre.id
+      idHandler(selectedGenreId)
+      
+    });
+  });
+});
+
+// handeling and fetching movies according to the selected genre
+  function idHandler(id) {
+    fetch(`${TMDB_BASE_URL}/discover/movie?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0&with_genres=${id}`)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data); // Log the response data
+      renderMovies(data.results);
+
+      
+    })
+  }
+
+
+idHandler()
+
+
+
+
+
