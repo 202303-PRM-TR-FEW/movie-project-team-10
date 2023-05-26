@@ -15,7 +15,10 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Movie</title>
   </head>
@@ -61,7 +64,11 @@
               </li>
             </ul>
           </li>
-          <li><a href="#" class="nav-link px-2 text-white">Actors</a></li>
+          <li>
+            <a id="actorsButton" href="#" class="nav-link px-2 text-white"
+              >Actors</a
+            >
+          </li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
           <li class="nav-item dropdown">
             <a
@@ -96,8 +103,9 @@
         </form>
       </div>
     </header>
-    <div class="container ">
-      
+
+    <div class="container">
+      <div id="actorsContainer"></div>
     </div>
 
     <script
