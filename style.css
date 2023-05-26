@@ -4,15 +4,28 @@
 
 .container {
   padding-top: 32px;
+}
+
+#actors {
+  margin: 24px 16px 0 0;
+}
+
+.actorsList {
   display: flex;
+  margin-top: 1rem;
+  margin: 0;
+  padding: 0;
+  align-content: flex-start;
+  cursor: pointer;
   justify-content: space-evenly;
   justify-items: stretch;
   flex-wrap: wrap;
-  
 }
-.card{
-    cursor: pointer;
+
+.card {
+  cursor: pointer;
 }
+
 #actors {
   margin: 24px 16px 0 0;
 }
