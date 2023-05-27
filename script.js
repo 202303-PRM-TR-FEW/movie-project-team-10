@@ -30,12 +30,10 @@ const movieDetails = async (movie) => {
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
-const fetchMovies = async (genre) => {
+const fetchMovies = async () => {
   const url = constructUrl(`movie/now_playing`);
   const res = await fetch(url);
-  const genres = res.json();
-  genres = genre
-  return genres
+  return res.json();
 };
 
 // Don't touch this function please. This function is to fetch one movie.
@@ -56,10 +54,11 @@ const fetchRelatedMovies = async (movie_id) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+  CONTAINER.innerHTML = "";
   // console.log(movies);
   const myCarouselElement = document.querySelector("#carousel");
 
-  const content = movies.map((movie) => {
+  const content = movies.forEach((movie) => {
     const movieDiv = document.createElement("div");
     const movieBtn = `
       <button
@@ -374,7 +373,8 @@ fetch(url)
       option.textContent = genre.name
       
     
-    option.addEventListener('click', function() {
+    option.addEventListener('click', function(event) {
+      event.preventDefault();
       fetch(`${TMDB_BASE_URL}/discover/movie?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0&with_genres=${genre.id}`)
     .then(resp => resp.json())
     .then(data => {
