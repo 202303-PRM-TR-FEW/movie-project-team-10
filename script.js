@@ -30,12 +30,12 @@ const movieDetails = async (movie) => {
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
-const fetchMovies = async () => {
+const fetchMovies = async (genre) => {
   const url = constructUrl(`movie/now_playing`);
   const res = await fetch(url);
-  return res.json();
-  // const data = await res.json();
-  // console.log(data.results);
+  const genres = res.json();
+  genres = genre
+  return genres
 };
 
 // Don't touch this function please. This function is to fetch one movie.
@@ -371,31 +371,24 @@ fetch(url)
       option.classList.add('dropdown-item')
       option.value = genre.id
       option.href = '#'
-      option.textContent = genre.name;
-      console.log(data)
+      option.textContent = genre.name
+      
     
     option.addEventListener('click', function() {
-      const selectedGenreId = genre.id
-      idHandler(selectedGenreId)
-      
-    });
-  });
-});
-
-// handeling and fetching movies according to the selected genre
-  function idHandler(id) {
-    fetch(`${TMDB_BASE_URL}/discover/movie?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0&with_genres=${id}`)
+      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0&with_genres=${genre.id}`)
     .then(resp => resp.json())
     .then(data => {
-      console.log(data); // Log the response data
-      renderMovies(data.results);
-
-      
+      console.log(data.results)
+      renderMovies(data.results)
+      })
     })
-  }
+  })
+})
 
 
-idHandler()
+
+
+
 
 
 
