@@ -348,9 +348,6 @@ aboutBtn.addEventListener("click", () => {
 });
 
 
-
-
-
 /// filter and genre dropdown section 
 
 
@@ -372,18 +369,21 @@ fetch(url)
       option.href = '#'
       option.textContent = genre.name
       
-    
     option.addEventListener('click', function(event) {
-      event.preventDefault();
-      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0&with_genres=${genre.id}`)
-    .then(resp => resp.json())
-    .then(data => {
-      console.log(data.results)
-      renderMovies(data.results)
-      })
+      const genreId = genre.id
+      genreIdfetcher(genreId)
     })
   })
 })
+
+// Handeler of fetching the genre based on the selected id 
+function genreIdfetcher(id) {
+    fetch(`${TMDB_BASE_URL}/discover/movie?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0&with_genres=${id}`)
+  .then(resp => resp.json())
+  .then(data => {
+    renderMovies(data.results)
+  })
+}
 
 
 
