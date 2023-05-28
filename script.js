@@ -386,6 +386,58 @@ function genreIdfetcher(id) {
 }
 
 
+// Handeling and ftching the dropdown filter
+
+function fetchingAndAssigninFilterDropDown () {
+
+// Filtering popularity
+  const dropdownPopular = document.getElementById("popular-drop-item")
+  dropdownPopular.addEventListener("click", () => {
+  fetch(`${TMDB_BASE_URL}/movie/popular?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`)
+  .then(resp => resp.json())
+  .then(data => {
+    renderMovies(data.results)
+    })
+  })
+
+// Filtering top rated movies
+  const dropdowntopRated = document.getElementById("topRated-drop-item")
+  dropdowntopRated.addEventListener('click', () => {
+  fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`)
+  .then(resp => resp.json())
+  .then(mata => {
+    renderMovies(mata.results)
+    })
+  })
+
+// Filtering Now playing movies
+  const dropdownNowPlaying = document.getElementById("nowPlaying-drop-item")
+  dropdownNowPlaying.addEventListener('click', () => {
+  fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`)
+  .then(resp => resp.json())
+  .then(data => {
+    renderMovies(data.results)
+    })
+  })
+
+// Filtering upcoming movies
+  const dropdownUpComing = document.getElementById("upComing-drop-item")
+  dropdownUpComing.addEventListener('click', () => {
+  fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`)
+  .then(resp => resp.json())
+  .then(data => {
+    renderMovies(data.results)
+    })
+  })
+  
+}
+
+fetchingAndAssigninFilterDropDown()
+
+
+
+
+
 
 
 
