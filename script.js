@@ -33,7 +33,7 @@ const movieDetails = async (movie) => {
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
 const fetchMovies = async () => {
-  const url = constructUrl(`movie/now_playing`);
+  const url = constructUrl(`movie/popular`);
   const res = await fetch(url);
   return res.json();
 };
