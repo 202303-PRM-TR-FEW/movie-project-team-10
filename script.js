@@ -112,13 +112,14 @@ const renderMovies = (movies) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie, movieCast, relatedMovies, director, trailers) => {
+console.log(movie)
   CONTAINER.innerHTML = `
     <div class="row">
       <div class="col-md-4">
         <img id="movie-backdrop" src=${
-          movie.backdrop_path == null
+          movie.poster_path == null
             ? "images/movieLogo2.jpg"
-            : BACKDROP_BASE_URL + movie.backdrop_path
+            : BACKDROP_BASE_URL + movie.poster_path
         }>
       </div>
       <div class="col-md-8">
@@ -275,8 +276,7 @@ const renderActors = (actors) => {
 
   actors.map((actor) => {
     const actorCard = document.createElement("div");
-    actorCard.innerHTML = `
-    
+    actorCard.innerHTML = `    
     <div class="card mb-3" style="width: 12rem;">
     <img id="actor-img" src="${
       actor.profile_path == null
@@ -303,37 +303,40 @@ const renderActor = (actor) => {
   // console.log(actor);
   CONTAINER.innerHTML = "";
   CONTAINER.innerHTML = `
-  <div class="row justify-content-center">
-  <div class="actorDiv">
+  <div class="row justify-content-center">    
+    <div class="actorDiv">
       <img id="actor-img" src="${
         actor.profile_path == null
           ? "images/avatar.svg"
           : PROFILE_BASE_URL + actor.profile_path
       }">
-      </div>
-      <div class="col-md-8">
-      <h5 id="actor-name">${actor.name}</h5>
-      <p id="actor-gender"><h3>Gender:</h3><p class="info"> ${
-        actor.gender == 1 ? "Female" : "Male"
-      }</p></p>
-      <p id="actor-popularity"><h3>Popularity:</h3> <p class="info">${
-        actor.popularity
-      }</p></p>
-      <p id="actor-birthday"><h3>Birthday:</h3> <p class="info">${
-        actor.birthday == null ? "-" : actor.birthday
-      }</p></p>
-      <p id="actor-deathday"><h3>Deathday:</h3> <p class="info">${
-        actor.deathday == null ? "-" : actor.deathday
-      }</p></p>
-      <h3>Biography</h3>
-      <p class="info" id="biography">${
+    </div>
+    <div>  
+      <h3 id="actor-name">${actor.name}</h3>      
+      <h5>Gender:</h5>
+        <p class="actorInfo"> ${actor.gender == 1 ? "Female" : "Male"}</p>  
+      <h5>Popularity:</h5>
+        <p class="actorInfo">${actor.popularity}</p>
+      <h5>Birthday:</h5>
+        <p class="actorInfo">${
+          actor.birthday == null ? "-" : actor.birthday
+        }</p>
+      <h5>Deathday:</h5>
+        <p class="actorInfo">${
+          actor.deathday == null ? "-" : actor.deathday
+        }</p>
+      <h5>Biography</h5>
+      <p class="actorInfo" id="biography">${
         actor.biography == "" ? "-" : actor.biography
-      }</p></div><div>
-      </div>
+      }</p>
+    </div>
+  </div>
+    <div> 
       <h3> Related Movies:</h3>
       <div class="row justify-content-center" id="knownFor">     
-      </div>    
-      </div>`;
+      </div> 
+      </div>   
+     `;
   fetchActorMovies(actor.id);
 };
 

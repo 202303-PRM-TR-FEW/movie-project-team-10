@@ -53,22 +53,22 @@
   width: 100%;
 }
 
-  .about-text {
-    font-size: 20px;
-    color: rgb(185, 42, 42);
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-  }
+.about-text {
+  font-size: 20px;
+  color: rgb(185, 42, 42);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
 
-  .about-text2 {
-    font-size: 20px;
-    color: rgb(0, 0, 0);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    display: flex;
-    justify-content: end;
-    margin-right: 150px;
+.about-text2 {
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  display: flex;
+  justify-content: end;
+  margin-right: 150px;
 }
 
 .aboutImage {
@@ -76,5 +76,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
 
+.actorInfo {
+  margin-top:2px ;
 }
