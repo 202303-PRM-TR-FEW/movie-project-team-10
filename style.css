@@ -81,3 +81,12 @@
 .actorInfo {
   margin-top:2px ;
 }
+
+.footerImage {
+  height: 40px;
+  width: 40px;
+  border-radius:20px;
+  border: solid  rgba(41, 7, 7, 0.205);
+  cursor: pointer;
+}
+
