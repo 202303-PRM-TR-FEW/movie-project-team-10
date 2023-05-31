@@ -116,6 +116,8 @@ body {
   text-align: left;
   font-size: 16px;
   background: #000;
+  border: 1px solid transparent;
+  border-radius: 5px;
 }
 
 .snip1577 *,
