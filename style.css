@@ -1,6 +1,10 @@
+
+
 #movie-backdrop {
   width: 100%;
 }
+
+
 
 .container {
   padding-top: 32px;
@@ -8,6 +12,11 @@
   justify-content: space-evenly;
   justify-items: stretch;
   flex-wrap: wrap;
+}
+
+body {
+  background-color: black;
+  color: aliceblue;
 }
 
 #actors {
@@ -28,6 +37,8 @@
 
 .card {
   cursor: pointer;
+  background-color: #46474b;
+  color: aliceblue;
 }
 
 #movie-img {

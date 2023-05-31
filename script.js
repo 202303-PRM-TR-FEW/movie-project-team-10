@@ -18,6 +18,7 @@ const constructUrl = (path) => {
   return `${TMDB_BASE_URL}/${path}?api_key=${atob(
     "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
   )}`;
+  
 };
 
 // You may need to add to this function, definitely don't delete it.
@@ -161,9 +162,10 @@ console.log(movie)
       <ul id="actors" class="list-unstyled list-group list-group-horizontal"></ul>
     </div>
 
-    <div class="row">
-      <h3>Related Movies:</h3>
-      <ul id="relatedMoviesList" class="list-unstyled list-group list-group-horizontal"></ul>
+    
+    <div class="card column">
+    <h3>Related Movies:</h3>  
+    <ul id="relatedMoviesList" class="flex list-unstyled list-group list-group-horizontal"></ul>
     </div>`;
   // console.log(movieCast);
 
