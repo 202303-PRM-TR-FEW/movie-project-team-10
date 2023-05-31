@@ -90,17 +90,16 @@ const renderMovies = (movies) => {
         Details
       </button>`;
     movieDiv.innerHTML = ` 
-    <div class="card" style="width: 18rem; margin-bottom: 10PX;">
+    <figure  class="card snip1577"  style="width: 18rem; margin-bottom: 10PX;">
       <img src="${
         BACKDROP_BASE_URL + movie.backdrop_path
-      }" class="card-img-top" />
-      <div class="card-body">
-        <h5 class="card-title text-center">${movie.title}</h5>
-        <p class="card-text">${movie.overview.slice(0, 100)}</p>
-        <p class="card-text "><b>Vote Average:</b> ${movie.vote_average}</p>
-        <p class="card-text"><b>Vote Count:</b> ${movie.vote_count}</p>    
-      </div>
-    </div>`;
+      }"  />
+      <figcaption >
+        <h3 >${movie.title}</h3>
+        <h4 ><b>Vote Average:</b> ${movie.vote_average}</p>
+        <h4 ><b>Vote Count:</b> ${movie.vote_count}</h4>    
+      </figcaption>
+    </figure >`;
 
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
@@ -163,9 +162,9 @@ console.log(movie)
     </div>
 
     
-    <div class="card column">
+    <div class=" column">
     <h3>Related Movies:</h3>  
-    <ul id="relatedMoviesList" class="flex list-unstyled list-group list-group-horizontal"></ul>
+    <ul id="relatedMoviesList"class="flex list-unstyled list-group list-group-horizontal"></ul>
     </div>`;
   // console.log(movieCast);
 
@@ -475,6 +474,17 @@ function fetchingAndAssigninFilterDropDown() {
   dropdownUpComing.addEventListener("click", () => {
     fetch(
       `${TMDB_BASE_URL}/movie/upcoming?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        renderMovies(data.results);
+      });
+  });
+
+  const home = document.getElementById("home-button");
+  home.addEventListener("click", () => {
+    fetch(
+      `${TMDB_BASE_URL}/movie/popular?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`
     )
       .then((resp) => resp.json())
       .then((data) => {
