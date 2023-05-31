@@ -96,6 +96,7 @@ const renderMovies = (movies) => {
       }"  />
       <figcaption >
         <h3 >${movie.title}</h3>
+        <br>
         <h4 ><b>Vote Average:</b> ${movie.vote_average}</p>
         <h4 ><b>Vote Count:</b> ${movie.vote_count}</h4>    
       </figcaption>
