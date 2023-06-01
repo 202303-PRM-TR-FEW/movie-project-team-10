@@ -94,12 +94,13 @@ const renderMovies = (movies) => {
         BACKDROP_BASE_URL + movie.backdrop_path
 
       }" class="card-img-top " />
-      <div class="card-body">
+      <figcaption class="card-body">
         <h3 class="card-title text-center">${movie.title}</h3>
+        <br>
         <h4 class="card-text "><b>Vote Average:</b> ${movie.vote_average}</h4>
         <h4 class="card-text"><b>Vote Count:</b> ${movie.vote_count}</h4>    
-      </div>
-    </div>`;
+      </figcaption>
+    </figure>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
