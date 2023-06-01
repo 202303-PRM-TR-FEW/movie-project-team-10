@@ -95,10 +95,9 @@ const renderMovies = (movies) => {
 
       }" class="card-img-top " />
       <div class="card-body">
-        <h5 class="card-title text-center">${movie.title}</h5>
-        <p class="card-text">${movie.overview.slice(0, 100)}</p>
-        <p class="card-text "><b>Vote Average:</b> ${movie.vote_average}</p>
-        <p class="card-text"><b>Vote Count:</b> ${movie.vote_count}</p>    
+        <h3 class="card-title text-center">${movie.title}</h3>
+        <h4 class="card-text "><b>Vote Average:</b> ${movie.vote_average}</h4>
+        <h4 class="card-text"><b>Vote Count:</b> ${movie.vote_count}</h4>    
       </div>
     </div>`;
     movieDiv.addEventListener("click", () => {
