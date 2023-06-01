@@ -89,9 +89,10 @@ const renderMovies = (movies) => {
         Details
       </button>`;
     movieDiv.innerHTML = ` 
-    <div class="card" style="width: 18rem; margin-bottom: 10PX;">
+    <figure  class="card snip1577"  style="width: 18rem; margin-bottom: 10PX;">
       <img src="${
         BACKDROP_BASE_URL + movie.backdrop_path
+
       }" class="card-img-top " />
       <div class="card-body">
         <h5 class="card-title text-center">${movie.title}</h5>
@@ -100,7 +101,6 @@ const renderMovies = (movies) => {
         <p class="card-text"><b>Vote Count:</b> ${movie.vote_count}</p>    
       </div>
     </div>`;
-
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
@@ -158,6 +158,7 @@ const renderMovie = (movie, movieCast, relatedMovies, director, trailers) => {
 
     <div class="row ">
       <h3>Actors:</h3>
+
       <ul id="actors" class="list-unstyled list-group list-group-horizontal-md"></ul>
     </div>    
     <div class="row">
@@ -484,6 +485,36 @@ function fetchingAndAssigninFilterDropDown() {
         renderMovies(data.results);
       });
   });
+
+  const home = document.getElementById("home-button");
+  home.addEventListener("click", () => {
+    fetch(
+      `${TMDB_BASE_URL}/movie/popular?api_key=7bdd4afb1f1beea5c5d1ed26587d9ea0`
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        renderMovies(data.results);
+      });
+  });
 }
 
 fetchingAndAssigninFilterDropDown();
+
+
+// search implementations
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', handleInput);
+
+
+function handleInput() {
+  const inputValue = searchInput.value;
+  fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${inputValue}&page=1&include_adult=false`)
+  .then((resp) => resp.json())
+      .then((data) => {
+        renderMovies(data.results);
+      });
+}
+
+
+
