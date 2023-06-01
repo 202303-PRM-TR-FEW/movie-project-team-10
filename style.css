@@ -59,14 +59,14 @@ body {
 }
 
 .about-container {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(3, 3, 3);
   height: 500px;
   width: 100%;
 }
 
 .about-text {
   font-size: 20px;
-  color: rgb(185, 42, 42);
+  color: rgb(196, 167, 38);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   display: flex;
   justify-content: center;
