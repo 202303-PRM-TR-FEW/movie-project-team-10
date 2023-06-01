@@ -156,15 +156,15 @@ console.log(movie)
       </div>
     </div> 
 
-    <div class="row">
+    <div class="row rounded ">
       <h3>Actors:</h3>
       <ul id="actors" class="list-unstyled list-group list-group-horizontal"></ul>
     </div>
 
     
-    <div class=" column">
+    <div class=" column rounded" >
     <h3>Related Movies:</h3>  
-    <ul id="relatedMoviesList"class="flex list-unstyled list-group list-group-horizontal"></ul>
+    <ul id="relatedMoviesList"class="flex rounded list-unstyled list-group list-group-horizontal"></ul>
     </div>`;
   // console.log(movieCast);
 
@@ -179,15 +179,18 @@ const renderRelatedMovies = (relatedMovies) => {
   relatedMovies.slice(0, 5).map((movie) => {
     const movieCard = document.createElement("li");
     movieCard.innerHTML = `    
-    <li class="list-group-item m-2">
+    <figure class="list-group-item m-2 rounded snip1577">
     <img id="movie-img" src="${
       movie.backdrop_path == null
         ? "images/movieLogo2.jpg"
         : BACKDROP_BASE_URL + movie.backdrop_path
-    }" style="width: 20rem; height: 10rem"><h5 class="card-title">${
+    }" style="width: 20rem; height: 10rem">
+    <figcaption>
+    <h3 class="card-title">${
       movie.title
-    }</h5>     
-      </li>`;
+    }</h3>
+    </figcaption>     
+      </figure>`;
     relatedMoviesList.appendChild(movieCard);
     movieCard.addEventListener("click", () => {
       movieDetails(movie);
@@ -243,7 +246,7 @@ const fetchActorMovies = async (person_id) => {
   for (let i = 0; i <= 4; i++) {
     const movieCard = document.createElement("li");
     movieCard.innerHTML = `    
-    <li class="list-group-item m-2">
+    <li class="list-group-item rounded m-2">
     <img id="movie-img" src="${
       movieRes[i].backdrop_path == null
         ? "images/movieLogo2.jpg"
@@ -358,11 +361,13 @@ const renderCast = (movieCast) => {
   movieCast.slice(0, 5).map((actor) => {
     const actorCard = document.createElement("li");
     actorCard.innerHTML = `  
-    <li class="list-group-item m-2"><img id="actor-img" src="${
+    <li style="background-color: #46474b;
+     border: 1px solid transparent;
+       color: aliceblue; " class="list-group-item  rounded m-2"><img id="actor-img" src="${
       actor.profile_path == null
         ? "images/avatar.svg"
         : PROFILE_BASE_URL + actor.profile_path
-    }" style="width: 9rem;"><h5 class="card-title">${actor.name}</h5>     
+    }" style="width: 9rem;"><h5 class="card-title  ">${actor.name}</h5>     
       </li>
     `;
     cast.appendChild(actorCard);
@@ -500,7 +505,6 @@ fetchingAndAssigninFilterDropDown();
 
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', handleInput);
-
 
 function handleInput() {
   const inputValue = searchInput.value;
