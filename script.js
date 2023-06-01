@@ -18,7 +18,6 @@ const constructUrl = (path) => {
   return `${TMDB_BASE_URL}/${path}?api_key=${atob(
     "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
   )}`;
-  
 };
 
 // You may need to add to this function, definitely don't delete it.
@@ -93,14 +92,15 @@ const renderMovies = (movies) => {
     <figure  class="card snip1577"  style="width: 18rem; margin-bottom: 10PX;">
       <img src="${
         BACKDROP_BASE_URL + movie.backdrop_path
-      }"  />
-      <figcaption >
-        <h3 >${movie.title}</h3>
-        <h4 ><b>Vote Average:</b> ${movie.vote_average}</p>
-        <h4 ><b>Vote Count:</b> ${movie.vote_count}</h4>    
-      </figcaption>
-    </figure >`;
 
+      }" class="card-img-top " />
+      <div class="card-body">
+        <h5 class="card-title text-center">${movie.title}</h5>
+        <p class="card-text">${movie.overview.slice(0, 100)}</p>
+        <p class="card-text "><b>Vote Average:</b> ${movie.vote_average}</p>
+        <p class="card-text"><b>Vote Count:</b> ${movie.vote_count}</p>    
+      </div>
+    </div>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
@@ -112,7 +112,7 @@ const renderMovies = (movies) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie, movieCast, relatedMovies, director, trailers) => {
-console.log(movie)
+  console.log(movie);
   CONTAINER.innerHTML = `
     <div class="row">
       <div class="col-md-4">
@@ -120,7 +120,7 @@ console.log(movie)
           movie.poster_path == null
             ? "images/movieLogo2.jpg"
             : BACKDROP_BASE_URL + movie.poster_path
-        }>
+        } >
       </div>
       <div class="col-md-8">
         <h2 id="movie-title">${movie.title}</h2>
@@ -152,19 +152,18 @@ console.log(movie)
       <div id="movie-trailer">
         <iframe class="trailer" src="https://www.youtube.com/embed/${
           trailers.results[0].key
-        }?autoplay=1" style="height:500px;width:900px;"></iframe>
+        }?autoplay=1" style="height:300px;width:600px;"></iframe>
       </div>
     </div> 
 
-    <div class="row">
+    <div class="row ">
       <h3>Actors:</h3>
-      <ul id="actors" class="list-unstyled list-group list-group-horizontal"></ul>
-    </div>
 
-    
-    <div class=" column">
+      <ul id="actors" class="list-unstyled list-group list-group-horizontal-md"></ul>
+    </div>    
+    <div class="row">
     <h3>Related Movies:</h3>  
-    <ul id="relatedMoviesList"class="flex list-unstyled list-group list-group-horizontal"></ul>
+    <ul id="relatedMoviesList" class=" list-unstyled list-group list-group-horizontal-md"></ul>
     </div>`;
   // console.log(movieCast);
 
@@ -177,17 +176,18 @@ const renderRelatedMovies = (relatedMovies) => {
   // console.log(relatedMovies);
   const relatedMoviesList = document.querySelector("#relatedMoviesList");
   relatedMovies.slice(0, 5).map((movie) => {
-    const movieCard = document.createElement("li");
-    movieCard.innerHTML = `    
-    <li class="list-group-item m-2">
+    const movieCard = document.createElement("div");
+    movieCard.innerHTML = `
+    <div class="card" style="margin: 5px;">
     <img id="movie-img" src="${
       movie.backdrop_path == null
         ? "images/movieLogo2.jpg"
         : BACKDROP_BASE_URL + movie.backdrop_path
-    }" style="width: 20rem; height: 10rem"><h5 class="card-title">${
-      movie.title
-    }</h5>     
-      </li>`;
+    }" class="card-img-top img-fluid" />
+    <div class="card-body">
+      <h5 class="card-title text-center">${movie.title}</h5>
+      </div>
+  </div>`;
     relatedMoviesList.appendChild(movieCard);
     movieCard.addEventListener("click", () => {
       movieDetails(movie);
@@ -235,23 +235,28 @@ const fetchActorMovies = async (person_id) => {
   const data = await res.json();
   const movieRes = data.cast;
   const knownFor = document.querySelector("#knownFor");
+  console.log(knownFor)
   const movieCardList = document.createElement("ul");
   movieCardList.setAttribute(
     "class",
-    "list-unstyled list-group list-group-horizontal"
+    "list-unstyled list-group list-group-horizontal-md "
   );
   for (let i = 0; i <= 4; i++) {
-    const movieCard = document.createElement("li");
+    const movieCard = document.createElement("div");
     movieCard.innerHTML = `    
-    <li class="list-group-item m-2">
+    <div class="card" style="margin: 5px;">
     <img id="movie-img" src="${
       movieRes[i].backdrop_path == null
         ? "images/movieLogo2.jpg"
         : PROFILE_BASE_URL + movieRes[i].backdrop_path
-    }" style="width: 20rem; height: 10rem"><h5 class="card-title">${
+    }" class="card-img-top img-fluid" />
+    <div class="card-body">
+      <h5 class="card-title">${
       movieRes[i].title
-    }</h5>     
-      </li>`;
+    }</h5>
+      </div>
+  </div>
+`;
     movieCardList.appendChild(movieCard);
     knownFor.appendChild(movieCardList);
     movieCard.addEventListener("click", () => {
@@ -283,7 +288,7 @@ const renderActors = (actors) => {
       actor.profile_path == null
         ? "images/avatar.svg"
         : PROFILE_BASE_URL + actor.profile_path
-    }">
+    }" class="card-img-top img-fluid" >
       <div class="card-body">
       <h5 class="card-title">${actor.name}</h5>
       </div>
@@ -332,11 +337,11 @@ const renderActor = (actor) => {
       }</p>
     </div>
   </div>
-    <div> 
-      <h3> Related Movies:</h3>
-      <div class="row justify-content-center" id="knownFor">     
-      </div> 
-      </div>   
+  <div class="row" >
+  <h3>Related Movies:</h3>
+  <div class="row justify-content-center " id="knownFor">    
+   
+      </div></div>     
      `;
   fetchActorMovies(actor.id);
 };
@@ -362,7 +367,7 @@ const renderCast = (movieCast) => {
       actor.profile_path == null
         ? "images/avatar.svg"
         : PROFILE_BASE_URL + actor.profile_path
-    }" style="width: 9rem;"><h5 class="card-title">${actor.name}</h5>     
+    }" class="card-img-top img-fluid" ><h5 class="card-title">${actor.name}</h5>     
       </li>
     `;
     cast.appendChild(actorCard);
