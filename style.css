@@ -34,6 +34,13 @@ body {
 
 .card {
   cursor: pointer;
+  background-color: black;
+  color: rgb(222, 201, 201);
+  
+}
+
+.card1 {
+  cursor: pointer;
   background-color: #46474b;
   color: aliceblue;
 }
@@ -160,16 +167,17 @@ body {
   padding: 15px 20px;
 }
 
-.snip1577 h3,
+.snip1577 h6,
 .snip1577 h4 {
   margin: 0;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: normal;
   opacity: 0;
 }
 
 .snip1577 h4 {
   font-size: .8em;
+  padding-top: 4px;
 }
 
 .snip1577 a {
@@ -208,15 +216,15 @@ body {
   height: 40px;
 }
 
-.snip1577:hover h3,
-.snip1577.hover h3,
+.snip1577:hover h6,
+.snip1577.hover h6,
 .snip1577:hover h4,
 .snip1577.hover h4 {
   opacity: 1;
 }
 
-.snip1577:hover h3,
-.snip1577.hover h3 {
+.snip1577:hover h6,
+.snip1577.hover h6 {
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }

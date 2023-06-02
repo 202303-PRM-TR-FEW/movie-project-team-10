@@ -88,19 +88,22 @@ const renderMovies = (movies) => {
       >
         Details
       </button>`;
-    movieDiv.innerHTML = ` 
-    <figure  class="card snip1577"  style="width: 18rem; margin-bottom: 10PX;">
+    movieDiv.innerHTML = `
+    <div class="card">
+    <figure  class=" snip1577"  style="width: 18rem; margin-bottom: 10PX;">
       <img src="${
         BACKDROP_BASE_URL + movie.backdrop_path
 
-      }" class="card-img-top " />
-      <figcaption class="card-body">
-        <h3 class="card-title text-center">${movie.title}</h3>
+      }" class="card-img-top rounded " />
+      <figcaption>
+        <h6 class="card-title text-center">${movie.overview.slice(0, 80)}...</h6>
         <br>
         <h4 class="card-text "><b>Vote Average:</b> ${movie.vote_average}</h4>
         <h4 class="card-text"><b>Vote Count:</b> ${movie.vote_count}</h4>    
       </figcaption>
-    </figure>`;
+    </figure>
+    <h6 class="card-title text-center">${movie.title}</h6>
+    </dive>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
@@ -177,15 +180,16 @@ const renderRelatedMovies = (relatedMovies) => {
   const relatedMoviesList = document.querySelector("#relatedMoviesList");
   relatedMovies.slice(0, 5).map((movie) => {
     const movieCard = document.createElement("div");
+    movieCard.classList.add("rounded");
     movieCard.innerHTML = `
-    <div class="card" style="margin: 5px;">
+    <div class="card" style=" margin: 5px;">
     <img id="movie-img" src="${
       movie.backdrop_path == null
         ? "images/movieLogo2.jpg"
         : BACKDROP_BASE_URL + movie.backdrop_path
-    }" class="card-img-top img-fluid" />
+    }" class="card-img-top img-fluid rounded" />
     <div class="card-body">
-      <h5 class="card-title text-center">${movie.title}</h5>
+      <h5 class="card-title text-center">${movie.title.slice(0, 19)}</h5>
       </div>
   </div>`;
     relatedMoviesList.appendChild(movieCard);
@@ -288,7 +292,7 @@ const renderActors = (actors) => {
       actor.profile_path == null
         ? "images/avatar.svg"
         : PROFILE_BASE_URL + actor.profile_path
-    }" class="card-img-top img-fluid" >
+    }" class="card-img-top rounded img-fluid" >
       <div class="card-body">
       <h5 class="card-title">${actor.name}</h5>
       </div>
@@ -362,12 +366,13 @@ const renderCast = (movieCast) => {
   const cast = document.querySelector("#actors");
   movieCast.slice(0, 5).map((actor) => {
     const actorCard = document.createElement("li");
+    actorCard.classList.add("card");
     actorCard.innerHTML = `  
-    <li class="list-group-item m-2"><img id="actor-img" src="${
+    <li class="card list-group-item m-2" style="border: 1px solid rgba(0, 0, 0, 0.5);  background-color: black;"><img id="actor-img" src="${
       actor.profile_path == null
         ? "images/avatar.svg"
         : PROFILE_BASE_URL + actor.profile_path
-    }" class="card-img-top img-fluid" ><h5 class="card-title">${actor.name}</h5>     
+    }" class="card card-img-top rounded img-fluid" ><h5 class="card-title  text-center">${actor.name}</h5>     
       </li>
     `;
     cast.appendChild(actorCard);
